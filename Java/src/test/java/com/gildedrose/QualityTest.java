@@ -143,4 +143,39 @@ class QualityTest {
         assertEquals(12, app.items[0].quality);
     }
 
+    @Test
+    void BackstagePassesQualityZeroAfterConcert() {
+        Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 3, 0) };
+        GildedRose app = new GildedRose(items);
+
+        assertEquals(0, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(3, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(6, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(9, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(0, app.items[0].quality);
+    }
+    @Test
+    void ConjuredQalityDegradesTwiceAsFast() {
+        Item[] items = new Item[] { new Item("Conjured", 3, 100) };
+        GildedRose app = new GildedRose(items);
+
+        assertEquals(100, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(98, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(96, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(94, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(90, app.items[0].quality);
+        app.updateQuality();
+        assertEquals(86, app.items[0].quality);
+    }
+
 }
